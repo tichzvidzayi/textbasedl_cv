@@ -164,39 +164,45 @@ const Terminal = () => {
         return createBox('CONTACT INFORMATION', contactLines);
 
       case 'experience':
-        const experienceLines = cvData.experience.flatMap((exp, idx) => [
-          '',
-          `[${idx + 1}] ${exp.title}`,
-          `    Company: ${exp.company}, ${exp.location}`,
-          `    Period: ${exp.dates}`,
-          '    Responsibilities:',
-          ...exp.responsibilities.map(resp => `      • ${resp}`),
-          `    Technologies: ${exp.technologies.join(', ')}`
-        ]);
+        const experienceLines = cvData.experience.flatMap((exp, idx) => {
+          const separator = idx < cvData.experience.length - 1 
+            ? ['─'.repeat(boxWidth - 4)]
+            : [];
+          return [
+            ...(idx > 0 ? [''] : []),
+            `[${idx + 1}] ${exp.title}`,
+            `    Company: ${exp.company}, ${exp.location}`,
+            `    Period: ${exp.dates}`,
+            '    Responsibilities:',
+            ...exp.responsibilities.map(resp => `      • ${resp}`),
+            `    Technologies: ${exp.technologies.join(', ')}`,
+            ...separator
+          ];
+        });
         return createBox('WORK EXPERIENCE', experienceLines);
 
       case 'skills':
         const skillsLines = [
           'Frontend Core:',
-          `  ${cvData.skills.frontend.join(', ')}`,
+          ...cvData.skills.frontend.map(skill => `  • ${skill}`),
           '',
           'UI/UX Tools:',
-          `  ${cvData.skills.uiux.join(', ')}`,
+          ...cvData.skills.uiux.map(skill => `  • ${skill}`),
           '',
           'APIs & Communication:',
-          `  ${cvData.skills.apis.join(', ')}`,
+          ...cvData.skills.apis.map(skill => `  • ${skill}`),
           '',
           'Backend & Integration:',
-          `  ${cvData.skills.backend.join(', ')}`,
+          ...cvData.skills.backend.map(skill => `  • ${skill}`),
           '',
           'DevOps & Tools:',
-          `  ${cvData.skills.devops.join(', ')}`,
+          ...cvData.skills.devops.map(skill => `  • ${skill}`),
           '',
           'Authorization & Security:',
-          `  ${cvData.skills.security.join(', ')}`,
+          ...cvData.skills.security.map(skill => `  • ${skill}`),
           '',
           'Optimization:',
-          `  ${cvData.skills.optimization.join(', ')}`
+          ...cvData.skills.optimization.map(skill => `  • ${skill}`)
         ];
         return createBox('TECHNICAL SKILLS', skillsLines);
 
@@ -210,13 +216,19 @@ const Terminal = () => {
         return createBox('EDUCATION', educationLines);
 
       case 'projects':
-        const projectLines = cvData.projects.flatMap((project, idx) => [
-          '',
-          `[${idx + 1}] ${project.name}`,
-          `    Description: ${project.description}`,
-          ...(project.github ? [`    GitHub: ${project.github}`] : []),
-          ...(project.live ? [`    Live: ${project.live}`] : [])
-        ]);
+        const projectLines = cvData.projects.flatMap((project, idx) => {
+          const separator = idx < cvData.projects.length - 1 
+            ? ['─'.repeat(boxWidth - 4)]
+            : [];
+          return [
+            ...(idx > 0 ? [''] : []),
+            `[${idx + 1}] ${project.name}`,
+            `    Description: ${project.description}`,
+            ...(project.github ? [`    GitHub: ${project.github}`] : []),
+            ...(project.live ? [`    Live: ${project.live}`] : []),
+            ...separator
+          ];
+        });
         return createBox('PROJECTS', projectLines);
 
       case 'certifications':
