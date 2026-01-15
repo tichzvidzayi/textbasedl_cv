@@ -93,7 +93,18 @@ const Terminal = () => {
 
       case 'about':
         const summaryLines = cvData.summary.split('\n').filter(line => line.trim());
-        return createBox('ABOUT', summaryLines);
+        const separator = '─'.repeat(BOX_WIDTH);
+        return [
+          { type: 'output', content: separator },
+          { type: 'output', content: `  ABOUT`, className: 'font-bold text-base' },
+          { type: 'output', content: separator },
+          ...summaryLines.map(line => ({ 
+            type: 'output' as const, 
+            content: `  ${line.trim()}`, 
+            className: 'break-words' 
+          })),
+          { type: 'output', content: separator }
+        ];
 
       case 'contact':
         const contactLines = [

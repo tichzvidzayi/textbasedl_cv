@@ -69,7 +69,7 @@ export const cvData: CVData = {
     github: "github.com/tichzvidzayi",
     linkedin: "linkedin.com/in/tichzvidzayi"
   },
-  summary: `Accomplished Full-Stack Software Engineer with over 7 years of experience.
+  summary: `Accomplished Full-Stack Software Engineer with over 6 years of experience.
 Specializes in React.js, Node, Laravel, C, and Next.js micro-frontends for applications in logistics, automotive, and legal tech.
 Expert in JavaScript (ES6+), TypeScript, RESTful APIs, GraphQL, and WebSockets, with a focus on secure, scalable, and responsive interfaces.
 Proficient in CI/CD automation, performance optimization (DynaTrace, Grafana), and modern authorization (JWT).
