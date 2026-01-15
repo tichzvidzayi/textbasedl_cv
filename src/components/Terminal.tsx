@@ -14,20 +14,21 @@ import {
 interface CommandOutput {
   type: 'command' | 'output' | 'error';
   content: string;
+  className?: string;
 }
 
 const Terminal = () => {
   const BOX_WIDTH = 70;
   
-  const createBox = (title: string, lines: string[]): string[] => {
+  const createBox = (title: string, lines: string[]): CommandOutput[] => {
     const separator = '─'.repeat(BOX_WIDTH);
     
     return [
-      separator,
-      `  ${title}`,
-      separator,
-      ...lines.map(line => `  ${line}`),
-      separator
+      { type: 'output', content: separator },
+      { type: 'output', content: `  ${title}`, className: 'font-bold text-base' },
+      { type: 'output', content: separator },
+      ...lines.map(line => ({ type: 'output' as const, content: `  ${line}` })),
+      { type: 'output', content: separator }
     ];
   };
 
@@ -37,7 +38,7 @@ const Terminal = () => {
     ...createBox('QUICK INFO', [
       'Full-Stack Software Engineer with 6+ years experience, specializing in',
       'micro-frontends and scalable solutions across multiple industries.'
-    ]).map(content => ({ type: 'output' as const, content })),
+    ]),
     { type: 'output', content: '' },
     { type: 'output', content: 'Type "help" to see all available commands.' },
     { type: 'output', content: '' }
@@ -88,11 +89,11 @@ const Terminal = () => {
           'interests     Show personal interests',
           'clear         Clear the terminal',
           'exit          Close terminal (just refresh page)'
-        ]).map(content => ({ type: 'output' as const, content }));
+        ]);
 
       case 'about':
         const summaryLines = cvData.summary.split('\n').filter(line => line.trim());
-        return createBox('ABOUT', summaryLines).map(content => ({ type: 'output' as const, content }));
+        return createBox('ABOUT', summaryLines);
 
       case 'contact':
         const contactLines = [
@@ -105,7 +106,7 @@ const Terminal = () => {
           `GitHub:   ${cvData.contact.github}`,
           `LinkedIn: ${cvData.contact.linkedin}`
         ];
-        return createBox('CONTACT INFORMATION', contactLines).map(content => ({ type: 'output' as const, content }));
+        return createBox('CONTACT INFORMATION', contactLines);
 
       case 'experience':
         const experienceLines = cvData.experience.flatMap((exp, idx) => [
@@ -117,7 +118,7 @@ const Terminal = () => {
           ...exp.responsibilities.map(resp => `      • ${resp}`),
           `    Technologies: ${exp.technologies.join(', ')}`
         ]);
-        return createBox('WORK EXPERIENCE', experienceLines).map(content => ({ type: 'output' as const, content }));
+        return createBox('WORK EXPERIENCE', experienceLines);
 
       case 'skills':
         const skillsLines = [
@@ -142,7 +143,7 @@ const Terminal = () => {
           'Optimization:',
           `  ${cvData.skills.optimization.join(', ')}`
         ];
-        return createBox('TECHNICAL SKILLS', skillsLines).map(content => ({ type: 'output' as const, content }));
+        return createBox('TECHNICAL SKILLS', skillsLines);
 
       case 'education':
         const educationLines = cvData.education.flatMap((edu, idx) => [
@@ -151,7 +152,7 @@ const Terminal = () => {
           `    Institution: ${edu.institution}, ${edu.location}`,
           `    Period: ${edu.dates}`
         ]);
-        return createBox('EDUCATION', educationLines).map(content => ({ type: 'output' as const, content }));
+        return createBox('EDUCATION', educationLines);
 
       case 'projects':
         const projectLines = cvData.projects.flatMap((project, idx) => [
@@ -161,24 +162,24 @@ const Terminal = () => {
           ...(project.github ? [`    GitHub: ${project.github}`] : []),
           ...(project.live ? [`    Live: ${project.live}`] : [])
         ]);
-        return createBox('PROJECTS', projectLines).map(content => ({ type: 'output' as const, content }));
+        return createBox('PROJECTS', projectLines);
 
       case 'certifications':
         const certLines = cvData.certifications.map((cert, idx) => 
           `[${idx + 1}] ${cert.platform}: ${cert.name}`
         );
-        return createBox('CERTIFICATIONS', certLines).map(content => ({ type: 'output' as const, content }));
+        return createBox('CERTIFICATIONS', certLines);
 
       case 'publications':
         const pubLines = cvData.publications.map(pub => `• ${pub}`);
-        return createBox('PUBLICATIONS', pubLines).map(content => ({ type: 'output' as const, content }));
+        return createBox('PUBLICATIONS', pubLines);
 
       case 'softskills':
         const softSkillsLines = cvData.softSkills.map(skill => `• ${skill}`);
-        return createBox('SOFT SKILLS', softSkillsLines).map(content => ({ type: 'output' as const, content }));
+        return createBox('SOFT SKILLS', softSkillsLines);
 
       case 'interests':
-        return createBox('INTERESTS', [cvData.interests.join(', ')]).map(content => ({ type: 'output' as const, content }));
+        return createBox('INTERESTS', [cvData.interests.join(', ')]);
 
       case 'clear':
         return [];
@@ -374,7 +375,7 @@ const Terminal = () => {
             <div className="relative border-2 border-green-500/60 rounded-xl p-5 bg-gradient-to-br from-black/60 via-gray-900/30 to-black/60 backdrop-blur-md shadow-[0_0_25px_rgba(34,197,94,0.2)] hover:shadow-[0_0_35px_rgba(34,197,94,0.3)] hover:border-green-400/80 transition-all duration-300 group">
               <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-500/0 via-green-500/4 to-green-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               
-              <div className="relative z-10 flex items-center gap-5">
+              <div className="relative z-10 flex flex-wrap items-center gap-5">
                 <div className="flex-shrink-0">
                   <img 
                     src="/images/profpic.png" 
@@ -392,16 +393,16 @@ const Terminal = () => {
                   </div>
                 </div>
                 
-                <div className="flex-1 text-left">
-                  <h1 className="text-3xl font-bold mb-1 font-mono tracking-tight">
+                <div className="flex-1 text-left min-w-0">
+                  <h1 className="text-3xl font-bold mb-1 font-mono tracking-tight break-words">
                     <span className="bg-gradient-to-r from-green-400 via-cyan-300 to-green-400 bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(34,197,94,0.5)]">
                       Tich Zvidzayi
                     </span>
                   </h1>
-                  <p className="text-cyan-300 text-base mb-1 font-mono font-medium">
+                  <p className="text-cyan-300 text-base mb-1 font-mono font-medium break-words">
                     Full-Stack Software Engineer
                   </p>
-                  <p className="text-green-400/70 text-xs font-mono italic">
+                  <p className="text-green-400/70 text-xs font-mono italic break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
                     Led Agile teams, architected solutions for Insurance & Public Health
                   </p>
                 </div>
@@ -458,11 +459,11 @@ const Terminal = () => {
                   onClick={() => {
                     executeCommandDirectly(item.cmd);
                   }}
-                  className="px-2 py-1.5 text-xs font-mono text-green-300/90 bg-gradient-to-r from-green-500/10 to-cyan-500/5 rounded border border-green-500/30 hover:border-green-400/60 hover:bg-green-500/20 hover:text-green-200 transition-all duration-200 hover:scale-105 hover:shadow-[0_0_8px_rgba(34,197,94,0.2)] cursor-pointer group active:scale-95"
+                  className="px-2 py-1.5 text-xs font-mono text-green-300/90 bg-gradient-to-r from-green-500/10 to-cyan-500/5 rounded border border-green-500/30 hover:border-green-400/60 hover:bg-green-500/20 hover:text-green-200 transition-all duration-200 hover:scale-105 hover:shadow-[0_0_8px_rgba(34,197,94,0.2)] cursor-pointer group active:scale-95 break-words min-w-0"
                   title={item.desc}
                 >
-                  <div className="font-semibold text-green-400 group-hover:text-green-300 transition-colors">{item.cmd}</div>
-                  <div className="text-[10px] text-green-400/60 group-hover:text-green-400/80 mt-0.5">{item.desc}</div>
+                  <div className="font-semibold text-green-400 group-hover:text-green-300 transition-colors break-words">{item.cmd}</div>
+                  <div className="text-[10px] text-green-400/60 group-hover:text-green-400/80 mt-0.5 break-words" style={{ wordBreak: 'break-word' }}>{item.desc}</div>
                 </button>
               ))}
             </div>
@@ -471,7 +472,7 @@ const Terminal = () => {
       </div>
       
       <div className="flex-1 overflow-y-auto terminal-scrollbar relative z-10" ref={terminalRef}>
-        <div className="max-w-3xl mx-auto px-6 py-6">
+        <div className="max-w-3xl mx-auto px-6 py-6 overflow-x-hidden">
           {history.map((item, idx) => (
             <div 
               key={idx} 
@@ -479,21 +480,21 @@ const Terminal = () => {
               style={{ animationDelay: `${idx * 0.02}s` }}
             >
               {item.type === 'command' && (
-                <div className="text-cyan-300/90 animate-slide-in-left drop-shadow-[0_0_3px_rgba(34,211,238,0.4)]">
+                <div className="text-cyan-300/90 animate-slide-in-left drop-shadow-[0_0_3px_rgba(34,211,238,0.4)] break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
                   <span className="text-blue-400 font-bold">{currentPath}</span>
                   <span className="text-yellow-400 mx-1">$</span> 
                   <span className="text-cyan-300">{item.content}</span>
                 </div>
               )}
               {item.type === 'output' && (
-                <div className="whitespace-pre text-green-300/90 leading-relaxed font-mono text-sm tracking-normal animate-fade-in-smooth drop-shadow-[0_0_2px_rgba(34,197,94,0.3)]">
+                <div className={`whitespace-pre-wrap break-words text-green-300/90 leading-relaxed font-mono text-sm tracking-normal animate-fade-in-smooth drop-shadow-[0_0_2px_rgba(34,197,94,0.3)] ${item.className || ''}`} style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
                   {item.content}
                 </div>
               )}
               {item.type === 'error' && (
-                <div className="text-red-400 bg-red-900/20 px-3 py-2 rounded-lg border border-red-500/30 animate-shake flex items-center gap-2">
-                  <FaExclamationTriangle className="text-red-500" />
-                  <span>{item.content}</span>
+                <div className="text-red-400 bg-red-900/20 px-3 py-2 rounded-lg border border-red-500/30 animate-shake flex items-center gap-2 break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                  <FaExclamationTriangle className="text-red-500 flex-shrink-0" />
+                  <span className="break-words">{item.content}</span>
                 </div>
               )}
             </div>
@@ -502,20 +503,20 @@ const Terminal = () => {
       </div>
       
       <div className="border-t border-green-500/30 bg-gradient-to-t from-black/90 via-gray-900/50 to-transparent backdrop-blur-sm relative z-10 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
-        <form onSubmit={handleSubmit} className="max-w-3xl mx-auto px-6 py-4 flex items-center">
-          <span className="text-blue-400 font-bold mr-2 animate-pulse-slow">{currentPath}</span>
-          <span className="text-yellow-400 mr-2">$</span>
+        <form onSubmit={handleSubmit} className="max-w-3xl mx-auto px-6 py-4 flex items-center min-w-0">
+          <span className="text-blue-400 font-bold mr-2 animate-pulse-slow flex-shrink-0">{currentPath}</span>
+          <span className="text-yellow-400 mr-2 flex-shrink-0">$</span>
           <input
             ref={inputRef}
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="flex-1 bg-transparent border-none outline-none text-green-300 placeholder-green-600/50 focus:placeholder-green-600/30 transition-all duration-300 focus:text-green-200"
+            className="flex-1 min-w-0 bg-transparent border-none outline-none text-green-300 placeholder-green-600/50 focus:placeholder-green-600/30 transition-all duration-300 focus:text-green-200"
             placeholder="Type a command..."
             autoFocus
           />
-          <span className="cursor-blink text-green-400 ml-2 text-lg">█</span>
+          <span className="cursor-blink text-green-400 ml-2 text-lg flex-shrink-0">█</span>
         </form>
       </div>
 
@@ -533,13 +534,13 @@ const Terminal = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
-              <div className="flex items-center gap-4 text-green-400/80">
-                <span className="flex items-center gap-1.5">
+              <div className="flex flex-wrap items-center justify-center gap-4 text-green-400/80 break-words">
+                <span className="flex items-center gap-1.5 break-words">
                   <span className="text-green-500">©</span>
-                  <span>{new Date().getFullYear()} Tich Zvidzayi</span>
+                  <span className="break-words">{new Date().getFullYear()} Tich Zvidzayi</span>
                 </span>
                 <span className="hidden sm:inline text-green-500/40">|</span>
-                <span className="text-green-400/70">Built with React & TypeScript</span>
+                <span className="text-green-400/70 break-words" style={{ wordBreak: 'break-word' }}>Built with React & TypeScript</span>
               </div>
               
               <div className="flex items-center gap-4">
@@ -572,7 +573,7 @@ const Terminal = () => {
             </div>
             
             <div className="mt-3 text-center">
-              <p className="text-green-400/60 text-[10px] font-mono">
+              <p className="text-green-400/60 text-[10px] font-mono break-words px-2" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
                 Type <span className="text-green-400/90 font-semibold">help</span> to see available commands
               </p>
             </div>
