@@ -191,6 +191,129 @@ const Terminal = () => {
           { type: 'output', content: 'Thanks for visiting! Refresh the page to restart.' }
         ];
 
+      // Fun messages for common Unix/Linux commands
+      case 'ls':
+      case 'dir':
+        return [
+          { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
+          { type: 'output', content: '│  😄 Lol, we don\'t do that here!                              │' },
+          { type: 'output', content: '│                                                             │' },
+          { type: 'output', content: '│  I can\'t expose my file directory. This is a CV terminal,  │' },
+          { type: 'output', content: '│  not a real shell! Try "help" to see what you can do.      │' },
+          { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
+        ];
+
+      case 'cd':
+        return [
+          { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
+          { type: 'output', content: '│  🚫 Nice try! But there\'s nowhere to navigate to.          │' },
+          { type: 'output', content: '│                                                             │' },
+          { type: 'output', content: '│  This terminal is locked to my CV. You\'re already in the   │' },
+          { type: 'output', content: '│  best directory - exploring my professional journey! 🚀     │' },
+          { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
+        ];
+
+      case 'rm':
+      case 'del':
+      case 'delete':
+        return [
+          { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
+          { type: 'output', content: '│  ⚠️  Whoa there! No deleting allowed!                        │' },
+          { type: 'output', content: '│                                                             │' },
+          { type: 'output', content: '│  This is a read-only CV terminal. You can\'t delete anything │' },
+          { type: 'output', content: '│  here. My data is safe! 🔒                                   │' },
+          { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
+        ];
+
+      case 'cat':
+      case 'type':
+      case 'less':
+      case 'more':
+        return [
+          { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
+          { type: 'output', content: '│  📄 File reading? Not in this terminal!                     │' },
+          { type: 'output', content: '│                                                             │' },
+          { type: 'output', content: '│  Use commands like "about", "skills", or "experience" to    │' },
+          { type: 'output', content: '│  view my information instead! 📚                              │' },
+          { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
+        ];
+
+      case 'pwd':
+        return [
+          { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
+          { type: 'output', content: '│  📍 You are here: Tich Zvidzayi\'s CV Terminal                │' },
+          { type: 'output', content: '│                                                             │' },
+          { type: 'output', content: '│  Current path: ~/professional-journey                      │' },
+          { type: 'output', content: '│  Status: Exploring awesome developer stuff! 🎯              │' },
+          { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
+        ];
+
+      case 'mkdir':
+      case 'rmdir':
+        return [
+          { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
+          { type: 'output', content: '│  🚧 Directory operations? Nope!                              │' },
+          { type: 'output', content: '│                                                             │' },
+          { type: 'output', content: '│  This terminal doesn\'t support file system operations.    │' },
+          { type: 'output', content: '│  It\'s all about showcasing my CV! Try "projects" instead.   │' },
+          { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
+        ];
+
+      case 'touch':
+        return [
+          { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
+          { type: 'output', content: '│  👆 Touch? This isn\'t a real file system!                  │' },
+          { type: 'output', content: '│                                                             │' },
+          { type: 'output', content: '│  You can\'t create files here. But you can explore my      │' },
+          { type: 'output', content: '│  projects with the "projects" command! 💻                  │' },
+          { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
+        ];
+
+      case 'sudo':
+        return [
+          { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
+          { type: 'output', content: '│  🔐 Sudo? You don\'t have admin privileges here!             │' },
+          { type: 'output', content: '│                                                             │' },
+          { type: 'output', content: '│  This is my CV terminal - I\'m the only admin! 😎          │' },
+          { type: 'output', content: '│  But you can explore freely with "help" command.           │' },
+          { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
+        ];
+
+      case 'git':
+        return [
+          { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
+          { type: 'output', content: '│  🌳 Git? Not available in this terminal!                     │' },
+          { type: 'output', content: '│                                                             │' },
+          { type: 'output', content: '│  But you can check out my GitHub:                          │' },
+          { type: 'output', content: '│  github.com/tichzvidzayi                                    │' },
+          { type: 'output', content: '│                                                             │' },
+          { type: 'output', content: '│  Or use "contact" to see all my links! 🔗                  │' },
+          { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
+        ];
+
+      case 'vim':
+      case 'vi':
+      case 'nano':
+      case 'emacs':
+        return [
+          { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
+          { type: 'output', content: '│  ✏️  Text editor? This terminal is read-only!                 │' },
+          { type: 'output', content: '│                                                             │' },
+          { type: 'output', content: '│  You can\'t edit files here. But you can read my            │' },
+          { type: 'output', content: '│  professional info with commands like "about" or "skills"! │' },
+          { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
+        ];
+
+      case 'ping':
+        return [
+          { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
+          { type: 'output', content: '│  🏓 PING! PONG! 🏓                                          │' },
+          { type: 'output', content: '│                                                             │' },
+          { type: 'output', content: '│  I\'m here and ready! This terminal is alive and kicking!   │' },
+          { type: 'output', content: '│  Try "help" to see what you can explore. 🚀                 │' },
+          { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
+        ];
+
       case '':
         return [];
 
