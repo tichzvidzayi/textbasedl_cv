@@ -525,21 +525,24 @@ const Terminal = () => {
                     onClick={() => {
                       executeCommandDirectly(item.cmd);
                     }}
-                    className={`px-1.5 py-1 sm:px-2 sm:py-1.5 text-[9px] sm:text-[10px] md:text-xs font-mono rounded border transition-all duration-200 cursor-pointer group active:scale-95 break-words min-w-0 touch-manipulation ${
+                    className={`px-1.5 py-1 sm:px-2 sm:py-1.5 text-[9px] sm:text-[10px] md:text-xs font-mono rounded border-2 transition-all duration-200 cursor-pointer group active:scale-95 break-words min-w-0 touch-manipulation relative ${
                       isActive
-                        ? 'text-green-200 bg-gradient-to-r from-green-500/30 to-cyan-500/20 border-green-400/80 shadow-[0_0_12px_rgba(34,197,94,0.4)] scale-105'
+                        ? 'text-green-100 bg-gradient-to-r from-green-500/40 to-cyan-500/30 border-green-400 shadow-[0_0_15px_rgba(34,197,94,0.6),inset_0_0_10px_rgba(34,197,94,0.2)] scale-[1.02]'
                         : 'text-green-300/90 bg-gradient-to-r from-green-500/10 to-cyan-500/5 border-green-500/30 hover:border-green-400/60 hover:bg-green-500/20 hover:text-green-200 hover:scale-105 hover:shadow-[0_0_8px_rgba(34,197,94,0.2)]'
                     }`}
                     title={item.desc}
                   >
-                    <div className={`font-semibold transition-colors break-words leading-tight ${
+                    {isActive && (
+                      <div className="absolute inset-0 rounded bg-gradient-to-r from-green-500/10 via-cyan-500/5 to-green-500/10 animate-pulse pointer-events-none"></div>
+                    )}
+                    <div className={`font-semibold transition-colors break-words leading-tight relative z-10 ${
                       isActive
-                        ? 'text-green-200'
+                        ? 'text-green-100 drop-shadow-[0_0_4px_rgba(34,197,94,0.8)]'
                         : 'text-green-400 group-hover:text-green-300'
                     }`}>{item.cmd}</div>
-                    <div className={`mt-0.5 break-words leading-tight transition-colors ${
+                    <div className={`mt-0.5 break-words leading-tight transition-colors relative z-10 ${
                       isActive
-                        ? 'text-green-300/90'
+                        ? 'text-green-200/90 drop-shadow-[0_0_2px_rgba(34,197,94,0.6)]'
                         : 'text-green-400/60 group-hover:text-green-400/80'
                     } text-[8px] sm:text-[9px] md:text-[10px]`} style={{ wordBreak: 'break-word' }}>{item.desc}</div>
                   </button>
@@ -552,10 +555,13 @@ const Terminal = () => {
       
       <div className="flex-1 overflow-y-auto terminal-scrollbar relative z-10" ref={terminalRef}>
         <div className="max-w-3xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 overflow-x-hidden">
-          {history.map((item, idx) => (
+          {history.map((item, idx) => {
+            const content = item.type === 'output' ? item.content.trim() : '';
+            const isSeparator = content && content.length > 0 && content.split('').every(char => char === '─');
+            return (
             <div 
               key={idx} 
-              className="mb-1 animate-fade-in-smooth"
+              className={`${isSeparator ? 'mb-0' : 'mb-1'} animate-fade-in-smooth`}
               style={{ animationDelay: `${idx * 0.02}s` }}
             >
               {item.type === 'command' && (
@@ -573,7 +579,7 @@ const Terminal = () => {
                 
                 return (
                   <div className={shouldNotWrap ? 'overflow-x-auto -mx-3 sm:-mx-4 md:-mx-6 px-3 sm:px-4 md:px-6' : ''}>
-                    <div className={`${shouldNotWrap ? 'whitespace-pre nowrap' : 'whitespace-pre-wrap break-words'} text-green-300/90 leading-relaxed font-mono text-xs sm:text-sm tracking-normal animate-fade-in-smooth drop-shadow-[0_0_2px_rgba(34,197,94,0.3)] ${item.className || ''}`} style={shouldNotWrap ? {} : { wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                    <div className={`${shouldNotWrap ? 'whitespace-pre nowrap leading-none' : 'whitespace-pre-wrap break-words leading-relaxed'} text-green-300/90 font-mono text-xs sm:text-sm tracking-normal animate-fade-in-smooth drop-shadow-[0_0_2px_rgba(34,197,94,0.3)] ${item.className || ''}`} style={shouldNotWrap ? { lineHeight: '1' } : { wordBreak: 'break-word', overflowWrap: 'break-word' }}>
                       {item.content}
                     </div>
                   </div>
@@ -586,7 +592,8 @@ const Terminal = () => {
                 </div>
               )}
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
       
