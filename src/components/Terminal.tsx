@@ -226,7 +226,22 @@ const Terminal = () => {
         return createBox('CERTIFICATIONS', certLines);
 
       case 'publications':
-        const pubLines = cvData.publications.map(pub => `• ${pub}`);
+        const pubLines = cvData.publications.flatMap((pub, idx) => {
+          const parts = pub.split('(');
+          const title = parts[0].trim();
+          const metadata = parts[1] ? parts[1].replace(')', '').trim() : '';
+          const metadataParts = metadata.split(',');
+          const venue = metadataParts[0]?.trim() || '';
+          const date = metadataParts.slice(1).join(',').trim() || '';
+          
+          return [
+            '',
+            `[${idx + 1}] ${title}`,
+            ...(venue ? [`    Venue: ${venue}`] : []),
+            ...(date ? [`    Date: ${date}`] : []),
+            ...(metadata && !venue && !date ? [`    ${metadata}`] : [])
+          ];
+        });
         return createBox('PUBLICATIONS', pubLines);
 
       case 'softskills':
