@@ -18,6 +18,18 @@
     font-variant-ligatures: none;
     letter-spacing: 0;
   }
+  
+  /* Hide scrollbar buttons globally */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(34, 197, 94, 0.5) rgba(17, 24, 39, 0.5);
+  }
+  
+  *::-webkit-scrollbar-button {
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
+  }
 }
 
 @layer utilities {
@@ -35,6 +47,17 @@
   
   .terminal-scrollbar::-webkit-scrollbar-thumb:hover {
     @apply bg-green-500/70;
+  }
+  
+  .terminal-scrollbar::-webkit-scrollbar-button {
+    display: none;
+    height: 0;
+    width: 0;
+  }
+  
+  .terminal-scrollbar::-webkit-scrollbar-button:start:decrement,
+  .terminal-scrollbar::-webkit-scrollbar-button:end:increment {
+    display: none;
   }
   
   /* Smooth scrolling */
