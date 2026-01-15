@@ -18,19 +18,24 @@ interface CommandOutput {
 }
 
 const Terminal = () => {
-  const [boxWidth, setBoxWidth] = useState(70);
+  const getBoxWidth = () => {
+    if (typeof window === 'undefined') return 70;
+    if (window.innerWidth < 640) {
+      return 40;
+    } else if (window.innerWidth < 768) {
+      return 50;
+    } else if (window.innerWidth < 1024) {
+      return 60;
+    } else {
+      return 70;
+    }
+  };
+  
+  const [boxWidth, setBoxWidth] = useState(getBoxWidth);
   
   useEffect(() => {
     const updateBoxWidth = () => {
-      if (window.innerWidth < 640) {
-        setBoxWidth(40);
-      } else if (window.innerWidth < 768) {
-        setBoxWidth(50);
-      } else if (window.innerWidth < 1024) {
-        setBoxWidth(60);
-      } else {
-        setBoxWidth(70);
-      }
+      setBoxWidth(getBoxWidth());
     };
     
     updateBoxWidth();
@@ -38,8 +43,9 @@ const Terminal = () => {
     return () => window.removeEventListener('resize', updateBoxWidth);
   }, []);
   
-  const createBox = (title: string, lines: string[]): CommandOutput[] => {
-    const separator = '─'.repeat(boxWidth);
+  const createBox = (title: string, lines: string[], width?: number): CommandOutput[] => {
+    const w = width ?? boxWidth;
+    const separator = '─'.repeat(w);
     
     return [
       { type: 'output', content: separator },
@@ -50,18 +56,20 @@ const Terminal = () => {
     ];
   };
 
+  const getInitialHistory = (width: number) => {
+    return [
+      { type: 'output' as const, content: '' },
+      ...createBox('QUICK INFO', [
+        'Full-Stack Software Engineer with 6+ years experience, specializing in',
+        'micro-frontends and scalable solutions across multiple industries.'
+      ], width),
+      { type: 'output' as const, content: '' },
+      { type: 'output' as const, content: 'Type "help" to see all available commands.' },
+      { type: 'output' as const, content: '' }
+    ];
+  };
 
-
-  const [history, setHistory] = useState<CommandOutput[]>([
-    { type: 'output', content: '' },
-    ...createBox('QUICK INFO', [
-      'Full-Stack Software Engineer with 6+ years experience, specializing in',
-      'micro-frontends and scalable solutions across multiple industries.'
-    ]),
-    { type: 'output', content: '' },
-    { type: 'output', content: 'Type "help" to see all available commands.' },
-    { type: 'output', content: '' }
-  ]);
+  const [history, setHistory] = useState<CommandOutput[]>(() => getInitialHistory(getBoxWidth()));
   const [input, setInput] = useState('');
   const [currentPath] = useState('~');
   const inputRef = useRef<HTMLInputElement>(null);
