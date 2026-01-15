@@ -276,7 +276,7 @@ const Terminal = () => {
         return [
           { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
           { type: 'output', content: '│  😄 Lol, we don\'t do that here!                            │' },
-          { type: 'output', content: '│                                                             │' },
+          { type: 'output', content: '│                                                              │' },
           { type: 'output', content: '│  I can\'t expose my file directory.                         │' },
           { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
         ];
@@ -285,8 +285,8 @@ const Terminal = () => {
         return [
           { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
           { type: 'output', content: '│  🚫 Nice try! But there\'s nowhere to navigate to.          │' },
-          { type: 'output', content: '│                                                             │' },
-          { type: 'output', content: '│  You\'re already in the                                     │' },
+          { type: 'output', content: '│                                                              │' },
+          { type: 'output', content: '│  You\'re already in the                                      │' },
           { type: 'output', content: '│  best directory - exploring my professional journey! 🚀     │' },
           { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
         ];
@@ -297,9 +297,9 @@ const Terminal = () => {
         return [
           { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
           { type: 'output', content: '│  ⚠️  Whoa there! No deleting allowed!                       │' },
-          { type: 'output', content: '│                                                             │' },
-          { type: 'output', content: '│  You can\'t delete anything │' },
-          { type: 'output', content: '│  here. My data is safe! 🔒                                   │' },
+          { type: 'output', content: '│                                                              │' },
+          { type: 'output', content: '│  You can\'t delete anything                                  │' },
+          { type: 'output', content: '│  here. My data is safe! 🔒                                  │' },
           { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
         ];
 
@@ -312,16 +312,16 @@ const Terminal = () => {
           { type: 'output', content: '│  📄 File reading? Not in this terminal!                     │' },
           { type: 'output', content: '│                                                             │' },
           { type: 'output', content: '│  Use commands like "about", "skills", or "experience" to    │' },
-          { type: 'output', content: '│  view my information instead! 📚                              │' },
+          { type: 'output', content: '│  view my information instead! 📚                            │' },
           { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
         ];
 
       case 'pwd':
         return [
           { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
-          { type: 'output', content: '│  📍 You are here: Tich Zvidzayi\'s CV Terminal                │' },
+          { type: 'output', content: '│  📍 You are here: Tich Zvidzayi\'s CV Terminal              │' },
           { type: 'output', content: '│                                                             │' },
-          { type: 'output', content: '│  Current path: ~/professional-journey                      │' },
+          { type: 'output', content: '│  Current path: ~/professional-journey                       │' },
           { type: 'output', content: '│  Status: Exploring awesome developer stuff! 🎯              │' },
           { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
         ];
@@ -330,9 +330,9 @@ const Terminal = () => {
       case 'rmdir':
         return [
           { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
-          { type: 'output', content: '│  🚧 Directory operations? Nope!                              │' },
-          { type: 'output', content: '│                                                             │' },
-          { type: 'output', content: '│  This terminal doesn\'t support file system operations.    │' },
+          { type: 'output', content: '│  🚧 Directory operations? Nope!                             │' },
+          { type: 'output', content: '│                                                              │' },
+          { type: 'output', content: '│  This terminal doesn\'t support file system operations.      │' },
           { type: 'output', content: '│  It\'s all about showcasing my CV! Try "projects" instead.   │' },
           { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
         ];
@@ -341,28 +341,28 @@ const Terminal = () => {
         return [
           { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
           { type: 'output', content: '│  👆 Touch? This isn\'t a real file system!                  │' },
-          { type: 'output', content: '│                                                             │' },
-          { type: 'output', content: '│  You can\'t create files here. But you can explore my      │' },
-          { type: 'output', content: '│  projects with the "projects" command! 💻                  │' },
+          { type: 'output', content: '│                                                              │' },
+          { type: 'output', content: '│  You can\'t create files here. But you can explore my        │' },
+          { type: 'output', content: '│  projects with the "projects" command! 💻                   │' },
           { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
         ];
 
       case 'sudo':
         return [
           { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
-          { type: 'output', content: '│  🔐 Sudo? You don\'t have admin privileges here!             │' },
+          { type: 'output', content: '│  🔐 Sudo? You don\'t have admin privileges here!            │' },
           { type: 'output', content: '│                                                             │' },
-          { type: 'output', content: '│  This is my CV terminal - I\'m the only admin! 😎          │' },
-          { type: 'output', content: '│  But you can explore freely with "help" command.           │' },
+          { type: 'output', content: '│  This is my CV terminal - I\'m the only admin! 😎           │' },
+          { type: 'output', content: '│  But you can explore freely with "help" command.            │' },
           { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
         ];
 
       case 'git':
         return [
           { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
-          { type: 'output', content: '│  🌳 Git? Not available in this terminal!                     │' },
+          { type: 'output', content: '│  🌳 Git? Not available in this terminal!                   │' },
           { type: 'output', content: '│                                                             │' },
-          { type: 'output', content: '│  But you can check out my GitHub:                          │' },
+          { type: 'output', content: '│  But you can check out my GitHub:                           │' },
           { type: 'output', content: '│  github.com/tichzvidzayi                                    │' },
           { type: 'output', content: '│                                                             │' },
           { type: 'output', content: '│  Or use "contact" to see all my links! 🔗                  │' },
@@ -375,7 +375,7 @@ const Terminal = () => {
       case 'emacs':
         return [
           { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
-          { type: 'output', content: '│  ✏️  Text editor? This terminal is read-only!                 │' },
+          { type: 'output', content: '│  ✏️  Text editor? This terminal is read-only!               │' },
           { type: 'output', content: '│                                                             │' },
           { type: 'output', content: '│  You can\'t edit files here. But you can read my            │' },
           { type: 'output', content: '│  professional info with commands like "about" or "skills"! │' },
@@ -399,15 +399,15 @@ const Terminal = () => {
         const funnyMessages: CommandOutput[][] = [
           [
             { type: 'output' as const, content: '┌─────────────────────────────────────────────────────────────┐' },
-            { type: 'output' as const, content: `│  🤔 Hmm, "${command}"? That's not in my vocabulary!            │` },
+            { type: 'output' as const, content: `│  🤔 Hmm, "${command}"? That's not in my vocabulary!        │` },
             { type: 'output' as const, content: '│                                                             │' },
-            { type: 'output' as const, content: '│  I\'m a CV terminal, not a magic 8-ball! 🎱                  │' },
-            { type: 'output' as const, content: '│  Try "help" to see what I actually know.                     │' },
+            { type: 'output' as const, content: '│  I\'m a CV terminal, not a magic 8-ball! 🎱                 │' },
+            { type: 'output' as const, content: '│  Try "help" to see what I actually know.                    │' },
             { type: 'output' as const, content: '└─────────────────────────────────────────────────────────────┘' }
           ],
           [
             { type: 'output' as const, content: '┌─────────────────────────────────────────────────────────────┐' },
-            { type: 'output' as const, content: `│  🚫 Nope! "${command}" isn't a thing here.                    │` },
+            { type: 'output' as const, content: `│  🚫 Nope! "${command}" isn't a thing here.                  │` },
             { type: 'output' as const, content: '│                                                             │' },
             { type: 'output' as const, content: '│  I\'m like a picky eater - I only accept specific commands! │' },
             { type: 'output' as const, content: '│  Type "help" to see my menu. 😄                              │' },
@@ -415,50 +415,50 @@ const Terminal = () => {
           ],
           [
             { type: 'output' as const, content: '┌─────────────────────────────────────────────────────────────┐' },
-            { type: 'output' as const, content: `│  💭 "${command}"? Never heard of it!                          │` },
+            { type: 'output' as const, content: `│  💭 "${command}"? Never heard of it!                        │` },
             { type: 'output' as const, content: '│                                                             │' },
-            { type: 'output' as const, content: '│  I\'m a CV terminal, not Google! 😂                           │' },
+            { type: 'output' as const, content: '│  I\'m a CV terminal, not Google! 😂                         │' },
             { type: 'output' as const, content: '│  Use "help" to see what commands I understand.               │' },
             { type: 'output' as const, content: '└─────────────────────────────────────────────────────────────┘' }
           ],
           [
             { type: 'output' as const, content: '┌─────────────────────────────────────────────────────────────┐' },
-            { type: 'output' as const, content: `│  🎭 "${command}"? That's not in my script!                   │` },
+            { type: 'output' as const, content: `│  🎭 "${command}"? That's not in my script!                  │` },
             { type: 'output' as const, content: '│                                                             │' },
-            { type: 'output' as const, content: '│  I\'m an actor who only knows certain lines! 🎬               │' },
-            { type: 'output' as const, content: '│  Check "help" for my lines.                                   │' },
+            { type: 'output' as const, content: '│  I\'m an actor who only knows certain lines! 🎬             │' },
+            { type: 'output' as const, content: '│  Check "help" for my lines.                                 │' },
             { type: 'output' as const, content: '└─────────────────────────────────────────────────────────────┘' }
           ],
           [
             { type: 'output' as const, content: '┌─────────────────────────────────────────────────────────────┐' },
-            { type: 'output' as const, content: `│  🤷 "${command}"? I don't speak that language!               │` },
+            { type: 'output' as const, content: `│  🤷 "${command}"? I don't speak that language!              │` },
             { type: 'output' as const, content: '│                                                             │' },
-            { type: 'output' as const, content: '│  I only understand CV-related commands! 📝                   │' },
+            { type: 'output' as const, content: '│  I only understand CV-related commands! 📝                  │' },
             { type: 'output' as const, content: '│  Type "help" to learn my language.                           │' },
             { type: 'output' as const, content: '└─────────────────────────────────────────────────────────────┘' }
           ],
           [
             { type: 'output' as const, content: '┌─────────────────────────────────────────────────────────────┐' },
-            { type: 'output' as const, content: `│  😅 "${command}"? That's a hard pass from me!                │` },
+            { type: 'output' as const, content: `│  😅 "${command}"? That's a hard pass from me!               │` },
             { type: 'output' as const, content: '│                                                             │' },
             { type: 'output' as const, content: '│  I\'m a professional CV terminal, not a command buffet! 🍽️  │' },
-            { type: 'output' as const, content: '│  Try "help" to see what\'s on the menu.                        │' },
+            { type: 'output' as const, content: '│  Try "help" to see what\'s on the menu.                     │' },
             { type: 'output' as const, content: '└─────────────────────────────────────────────────────────────┘' }
           ],
           [
             { type: 'output' as const, content: '┌─────────────────────────────────────────────────────────────┐' },
             { type: 'output' as const, content: `│  🎪 "${command}"? That command doesn't exist in this circus!  │` },
             { type: 'output' as const, content: '│                                                             │' },
-            { type: 'output' as const, content: '│  I\'m a CV terminal, not a command magician! 🎩                │' },
-            { type: 'output' as const, content: '│  Type "help" to see my tricks!                               │' },
+            { type: 'output' as const, content: '│  I\'m a CV terminal, not a command magician! 🎩             │' },
+            { type: 'output' as const, content: '│  Type "help" to see my tricks!                              │' },
             { type: 'output' as const, content: '└─────────────────────────────────────────────────────────────┘' }
           ],
           [
             { type: 'output' as const, content: '┌─────────────────────────────────────────────────────────────┐' },
-            { type: 'output' as const, content: `│  🚀 "${command}"? That's not how I roll!                      │` },
+            { type: 'output' as const, content: `│  🚀 "${command}"? That's not how I roll!                   │` },
             { type: 'output' as const, content: '│                                                             │' },
-            { type: 'output' as const, content: '│  I\'m a CV terminal on a mission! 🎯                         │' },
-            { type: 'output' as const, content: '│  Use "help" to see my mission commands.                      │' },
+            { type: 'output' as const, content: '│  I\'m a CV terminal on a mission! 🎯                       │' },
+            { type: 'output' as const, content: '│  Use "help" to see my mission commands.                     │' },
             { type: 'output' as const, content: '└─────────────────────────────────────────────────────────────┘' }
           ]
         ];
