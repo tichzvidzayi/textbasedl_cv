@@ -166,7 +166,7 @@ const Terminal = () => {
       case 'experience':
         const experienceLines = cvData.experience.flatMap((exp, idx) => {
           const separator = idx < cvData.experience.length - 1 
-            ? ['─'.repeat(boxWidth - 4)]
+            ? ['- '.repeat(Math.floor((boxWidth - 4) / 2)).trim()]
             : [];
           return [
             ...(idx > 0 ? [''] : []),
@@ -218,7 +218,7 @@ const Terminal = () => {
       case 'projects':
         const projectLines = cvData.projects.flatMap((project, idx) => {
           const separator = idx < cvData.projects.length - 1 
-            ? ['─'.repeat(boxWidth - 4)]
+            ? ['- '.repeat(Math.floor((boxWidth - 4) / 2)).trim()]
             : [];
           return [
             ...(idx > 0 ? [''] : []),
