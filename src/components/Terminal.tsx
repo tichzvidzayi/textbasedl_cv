@@ -49,10 +49,20 @@ const Terminal = () => {
 
   useEffect(() => {
     if (terminalRef.current) {
-      terminalRef.current.scrollTo({
-        top: terminalRef.current.scrollHeight,
-        behavior: 'smooth'
-      });
+      // Only auto-scroll to bottom if history is being appended (not cleared)
+      // When history length is small (new command), scroll to top
+      if (history.length <= 5) {
+        terminalRef.current.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      } else {
+        // For longer history, scroll to bottom (normal typing behavior)
+        terminalRef.current.scrollTo({
+          top: terminalRef.current.scrollHeight,
+          behavior: 'smooth'
+        });
+      }
     }
   }, [history]);
 
@@ -202,10 +212,16 @@ const Terminal = () => {
       return;
     }
 
-    const commandOutput: CommandOutput = { type: 'command', content: cmd };
-    const results = executeCommand(cmd);
-
-    setHistory(prev => [...prev, commandOutput, ...results, { type: 'output', content: '' }]);
+    // Clear terminal first, then show command and output
+    setHistory([]);
+    
+    // Use setTimeout to ensure smooth transition and proper scrolling
+    setTimeout(() => {
+      const commandOutput: CommandOutput = { type: 'command', content: cmd };
+      const results = executeCommand(cmd);
+      
+      setHistory([commandOutput, ...results, { type: 'output', content: '' }]);
+    }, 150);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -399,6 +415,56 @@ const Terminal = () => {
           <span className="cursor-blink text-green-400 ml-2 text-lg">█</span>
         </form>
       </div>
+
+      {/* Footer */}
+      <footer className="border-t border-green-500/30 bg-gradient-to-b from-black/90 via-gray-900/50 to-black/95 backdrop-blur-sm relative z-10 py-3">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
+            <div className="flex items-center gap-4 text-green-400/70">
+              <span className="flex items-center gap-1.5">
+                <span className="text-green-500">©</span>
+                <span>{new Date().getFullYear()} Tich Zvidzayi</span>
+              </span>
+              <span className="hidden sm:inline text-green-500/50">|</span>
+              <span className="text-green-400/60">Built with React & TypeScript</span>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <a 
+                href="https://github.com/tichzvidzayi" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-green-400/70 hover:text-green-300 transition-all duration-200 hover:scale-110"
+                title="GitHub"
+              >
+                <FaGithub className="text-sm" />
+              </a>
+              <a 
+                href="https://linkedin.com/in/tichzvidzayi" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-green-400/70 hover:text-green-300 transition-all duration-200 hover:scale-110"
+                title="LinkedIn"
+              >
+                <FaLinkedin className="text-sm" />
+              </a>
+              <a 
+                href="mailto:tzvidzayi@hotmail.com" 
+                className="text-green-400/70 hover:text-green-300 transition-all duration-200 hover:scale-110"
+                title="Email"
+              >
+                <FaEnvelope className="text-sm" />
+              </a>
+            </div>
+          </div>
+          
+          <div className="mt-2 text-center">
+            <p className="text-green-400/50 text-[10px] font-mono">
+              Type <span className="text-green-400/80 font-semibold">help</span> to see available commands
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
