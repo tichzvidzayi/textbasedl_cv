@@ -399,18 +399,18 @@ const Terminal = () => {
         <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-cyan-500/30 rounded-full animate-pulse" style={{ animationDelay: '1s', animationDuration: '4s' }}></div>
         <div className="absolute bottom-1/4 left-1/3 w-1 h-1 bg-green-400/20 rounded-full animate-pulse" style={{ animationDelay: '2s', animationDuration: '5s' }}></div>
       </div>
-      <div className="border-b border-green-500/30 bg-gradient-to-b from-black/95 via-gray-900/60 to-black/95 backdrop-blur-xl p-3 sm:p-4 shadow-2xl relative z-10">
-        <div className="max-w-5xl mx-auto space-y-2 sm:space-y-3">
+      <div className="border-b border-green-500/30 bg-gradient-to-b from-black/95 via-gray-900/60 to-black/95 backdrop-blur-xl p-2 sm:p-3 md:p-4 shadow-2xl relative z-10">
+        <div className="max-w-5xl mx-auto space-y-1.5 sm:space-y-2 md:space-y-3">
           <div className="text-center">
-            <div className="relative border-2 border-green-500/60 rounded-xl p-3 sm:p-4 md:p-5 bg-gradient-to-br from-black/60 via-gray-900/30 to-black/60 backdrop-blur-md shadow-[0_0_25px_rgba(34,197,94,0.2)] hover:shadow-[0_0_35px_rgba(34,197,94,0.3)] hover:border-green-400/80 transition-all duration-300 group">
+            <div className="relative border-2 border-green-500/60 rounded-xl p-2 sm:p-3 md:p-4 lg:p-5 bg-gradient-to-br from-black/60 via-gray-900/30 to-black/60 backdrop-blur-md shadow-[0_0_25px_rgba(34,197,94,0.2)] hover:shadow-[0_0_35px_rgba(34,197,94,0.3)] hover:border-green-400/80 transition-all duration-300 group">
               <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-500/0 via-green-500/4 to-green-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               
-              <div className="relative z-10 flex flex-col sm:flex-row flex-wrap items-center gap-3 sm:gap-4 md:gap-5">
+              <div className="relative z-10 flex flex-col sm:flex-row flex-wrap items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5">
                 <div className="flex-shrink-0">
                   <img 
                     src="/images/profpic.png" 
                     alt="Tich Zvidzayi" 
-                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-3 border-green-500/60 shadow-[0_0_18px_rgba(34,197,94,0.35)] object-cover hover:border-green-400/80 transition-all duration-300 hover:scale-105"
+                    className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full border-2 sm:border-3 border-green-500/60 shadow-[0_0_18px_rgba(34,197,94,0.35)] object-cover hover:border-green-400/80 transition-all duration-300 hover:scale-105"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';
@@ -418,58 +418,58 @@ const Terminal = () => {
                       if (placeholder) placeholder.style.display = 'flex';
                     }}
                   />
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-3 border-green-500/60 shadow-[0_0_18px_rgba(34,197,94,0.35)] bg-gradient-to-br from-green-500/20 to-cyan-500/20 items-center justify-center text-2xl sm:text-3xl text-green-400 hidden">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full border-2 sm:border-3 border-green-500/60 shadow-[0_0_18px_rgba(34,197,94,0.35)] bg-gradient-to-br from-green-500/20 to-cyan-500/20 items-center justify-center text-xl sm:text-2xl md:text-3xl text-green-400 hidden">
                     <FaUser className="m-auto" />
                   </div>
                 </div>
                 
                 <div className="flex-1 text-center sm:text-left min-w-0 w-full sm:w-auto">
-                  <h1 className="text-2xl sm:text-3xl font-bold mb-1 font-mono tracking-tight break-words">
+                  <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-0.5 sm:mb-1 font-mono tracking-tight break-words">
                     <span className="bg-gradient-to-r from-green-400 via-cyan-300 to-green-400 bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(34,197,94,0.5)]">
                       Tich Zvidzayi
                     </span>
                   </h1>
-                  <p className="text-cyan-300 text-sm sm:text-base mb-1 font-mono font-medium break-words">
+                  <p className="text-cyan-300 text-xs sm:text-sm md:text-base mb-0.5 sm:mb-1 font-mono font-medium break-words">
                     Full-Stack Software Engineer
                   </p>
-                  <p className="text-green-400/70 text-[10px] sm:text-xs font-mono italic break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                  <p className="text-green-400/70 text-[9px] sm:text-[10px] md:text-xs font-mono italic break-words hidden sm:block" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
                     Led Agile teams, architected solutions for Insurance & Public Health
                   </p>
                 </div>
                 
-                <div className="flex-shrink-0 flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-green-300/95 font-mono w-full sm:w-auto">
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    <FaGraduationCap className="text-green-400 text-sm sm:text-base" />
+                <div className="flex-shrink-0 flex items-center justify-center gap-2 sm:gap-3 md:gap-4 text-[10px] sm:text-xs md:text-sm text-green-300/95 font-mono w-full sm:w-auto">
+                  <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2">
+                    <FaGraduationCap className="text-green-400 text-xs sm:text-sm md:text-base" />
                     <span className="hidden sm:inline">Masters</span>
                   </div>
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    <FaBriefcase className="text-green-400 text-sm sm:text-base" />
+                  <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2">
+                    <FaBriefcase className="text-green-400 text-xs sm:text-sm md:text-base" />
                     <span className="hidden sm:inline">6+ yrs</span>
                   </div>
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    <FaMapMarkerAlt className="text-green-400 text-sm sm:text-base" />
+                  <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2">
+                    <FaMapMarkerAlt className="text-green-400 text-xs sm:text-sm md:text-base" />
                     <span className="hidden md:inline">Gauteng</span>
                   </div>
                 </div>
                 
-                <div className="flex-shrink-0 flex items-center justify-center gap-3 sm:gap-3 w-full sm:w-auto">
+                <div className="flex-shrink-0 flex items-center justify-center gap-2 sm:gap-3 text-xs sm:text-base md:text-lg w-full sm:w-auto">
                   <a href="mailto:tzvidzayi@hotmail.com" className="text-green-400 hover:text-green-300 transition-all duration-200 hover:shadow-[0_0_8px_rgba(34,197,94,0.3)] hover:scale-110" title="Email">
-                    <FaEnvelope className="text-base sm:text-lg" />
+                    <FaEnvelope />
                   </a>
                   <a href="https://github.com/tichzvidzayi" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 transition-all duration-200 hover:shadow-[0_0_8px_rgba(34,197,94,0.3)] hover:scale-110" title="GitHub">
-                    <FaGithub className="text-base sm:text-lg" />
+                    <FaGithub />
                   </a>
                   <a href="https://linkedin.com/in/tichzvidzayi" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 transition-all duration-200 hover:shadow-[0_0_8px_rgba(34,197,94,0.3)] hover:scale-110" title="LinkedIn">
-                    <FaLinkedin className="text-base sm:text-lg" />
+                    <FaLinkedin />
                   </a>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="relative border border-green-500/40 rounded-lg p-2 sm:p-3 bg-gradient-to-br from-black/40 via-gray-900/20 to-black/40 backdrop-blur-sm shadow-[0_0_15px_rgba(34,197,94,0.1)]">
-            <div className="text-[10px] sm:text-xs text-green-400/80 mb-1.5 sm:mb-2 font-semibold tracking-wider uppercase text-center">Quick Commands</div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1.5 sm:gap-2">
+          <div className="relative border border-green-500/40 rounded-lg p-1.5 sm:p-2 md:p-3 bg-gradient-to-br from-black/40 via-gray-900/20 to-black/40 backdrop-blur-sm shadow-[0_0_15px_rgba(34,197,94,0.1)]">
+            <div className="text-[9px] sm:text-[10px] md:text-xs text-green-400/80 mb-1 sm:mb-1.5 md:mb-2 font-semibold tracking-wider uppercase text-center">Quick Commands</div>
+            <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1 sm:gap-1.5 md:gap-2">
               {[
                 { cmd: 'help', desc: 'Show help' },
                 { cmd: 'about', desc: 'About me' },
@@ -489,11 +489,11 @@ const Terminal = () => {
                   onClick={() => {
                     executeCommandDirectly(item.cmd);
                   }}
-                  className="px-2 py-2 sm:py-1.5 text-[10px] sm:text-xs font-mono text-green-300/90 bg-gradient-to-r from-green-500/10 to-cyan-500/5 rounded border border-green-500/30 hover:border-green-400/60 hover:bg-green-500/20 hover:text-green-200 transition-all duration-200 hover:scale-105 hover:shadow-[0_0_8px_rgba(34,197,94,0.2)] cursor-pointer group active:scale-95 break-words min-w-0 touch-manipulation"
+                  className="px-1.5 py-1 sm:px-2 sm:py-1.5 text-[9px] sm:text-[10px] md:text-xs font-mono text-green-300/90 bg-gradient-to-r from-green-500/10 to-cyan-500/5 rounded border border-green-500/30 hover:border-green-400/60 hover:bg-green-500/20 hover:text-green-200 transition-all duration-200 hover:scale-105 hover:shadow-[0_0_8px_rgba(34,197,94,0.2)] cursor-pointer group active:scale-95 break-words min-w-0 touch-manipulation"
                   title={item.desc}
                 >
-                  <div className="font-semibold text-green-400 group-hover:text-green-300 transition-colors break-words">{item.cmd}</div>
-                  <div className="text-[9px] sm:text-[10px] text-green-400/60 group-hover:text-green-400/80 mt-0.5 break-words" style={{ wordBreak: 'break-word' }}>{item.desc}</div>
+                  <div className="font-semibold text-green-400 group-hover:text-green-300 transition-colors break-words leading-tight">{item.cmd}</div>
+                  <div className="text-[8px] sm:text-[9px] md:text-[10px] text-green-400/60 group-hover:text-green-400/80 mt-0.5 break-words leading-tight" style={{ wordBreak: 'break-word' }}>{item.desc}</div>
                 </button>
               ))}
             </div>
@@ -533,21 +533,21 @@ const Terminal = () => {
       </div>
       
       <div className="border-t border-green-500/30 bg-gradient-to-t from-black/90 via-gray-900/50 to-transparent backdrop-blur-sm relative z-10 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
-        <form onSubmit={handleSubmit} className="max-w-3xl mx-auto px-3 sm:px-4 md:px-6 py-3 sm:py-4 flex items-center min-w-0">
-          <span className="text-blue-400 font-bold mr-1 sm:mr-2 animate-pulse-slow flex-shrink-0 text-sm sm:text-base">{currentPath}</span>
-          <span className="text-yellow-400 mr-1 sm:mr-2 flex-shrink-0 text-sm sm:text-base">$</span>
+        <form onSubmit={handleSubmit} className="max-w-3xl mx-auto px-2 sm:px-3 md:px-6 py-2 sm:py-3 md:py-4 flex items-center min-w-0">
+          <span className="text-blue-400 font-bold mr-1 sm:mr-2 animate-pulse-slow flex-shrink-0 text-xs sm:text-sm md:text-base">{currentPath}</span>
+          <span className="text-yellow-400 mr-1 sm:mr-2 flex-shrink-0 text-xs sm:text-sm md:text-base">$</span>
           <input
             ref={inputRef}
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="flex-1 min-w-0 bg-transparent border-none outline-none text-green-300 placeholder-green-600/50 focus:placeholder-green-600/30 transition-all duration-300 focus:text-green-200 text-sm sm:text-base"
+            className="flex-1 min-w-0 bg-transparent border-none outline-none text-green-300 placeholder-green-600/50 focus:placeholder-green-600/30 transition-all duration-300 focus:text-green-200 text-xs sm:text-sm md:text-base"
             placeholder="Type a command..."
             autoFocus
             autoComplete="off"
           />
-          <span className="cursor-blink text-green-400 ml-1 sm:ml-2 text-base sm:text-lg flex-shrink-0">█</span>
+          <span className="cursor-blink text-green-400 ml-1 sm:ml-2 text-sm sm:text-base md:text-lg flex-shrink-0">█</span>
         </form>
       </div>
 
