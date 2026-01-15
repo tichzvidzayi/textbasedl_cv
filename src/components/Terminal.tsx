@@ -207,12 +207,18 @@ const Terminal = () => {
         return createBox('TECHNICAL SKILLS', skillsLines);
 
       case 'education':
-        const educationLines = cvData.education.flatMap((edu, idx) => [
-          '',
-          `[${idx + 1}] ${edu.degree}`,
-          `    Institution: ${edu.institution}, ${edu.location}`,
-          `    Period: ${edu.dates}`
-        ]);
+        const educationLines = cvData.education.flatMap((edu, idx) => {
+          const separator = idx < cvData.education.length - 1 
+            ? ['- '.repeat(Math.floor((boxWidth - 4) / 2)).trim()]
+            : [];
+          return [
+            ...(idx > 0 ? [''] : []),
+            `[${idx + 1}] ${edu.degree}`,
+            `    Institution: ${edu.institution}, ${edu.location}`,
+            `    Period: ${edu.dates}`,
+            ...separator
+          ];
+        });
         return createBox('EDUCATION', educationLines);
 
       case 'projects':
@@ -232,9 +238,16 @@ const Terminal = () => {
         return createBox('PROJECTS', projectLines);
 
       case 'certifications':
-        const certLines = cvData.certifications.map((cert, idx) => 
-          `[${idx + 1}] ${cert.platform}: ${cert.name}`
-        );
+        const certLines = cvData.certifications.flatMap((cert, idx) => {
+          const separator = idx < cvData.certifications.length - 1 
+            ? ['- '.repeat(Math.floor((boxWidth - 4) / 2)).trim()]
+            : [];
+          return [
+            ...(idx > 0 ? [''] : []),
+            `[${idx + 1}] ${cert.platform}: ${cert.name}`,
+            ...separator
+          ];
+        });
         return createBox('CERTIFICATIONS', certLines);
 
       case 'publications':
@@ -245,13 +258,17 @@ const Terminal = () => {
           const metadataParts = metadata.split(',');
           const venue = metadataParts[0]?.trim() || '';
           const date = metadataParts.slice(1).join(',').trim() || '';
+          const separator = idx < cvData.publications.length - 1 
+            ? ['- '.repeat(Math.floor((boxWidth - 4) / 2)).trim()]
+            : [];
           
           return [
-            '',
+            ...(idx > 0 ? [''] : []),
             `[${idx + 1}] ${title}`,
             ...(venue ? [`    Venue: ${venue}`] : []),
             ...(date ? [`    Date: ${date}`] : []),
-            ...(metadata && !venue && !date ? [`    ${metadata}`] : [])
+            ...(metadata && !venue && !date ? [`    ${metadata}`] : []),
+            ...separator
           ];
         });
         return createBox('PUBLICATIONS', pubLines);
