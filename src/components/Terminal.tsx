@@ -49,15 +49,12 @@ const Terminal = () => {
 
   useEffect(() => {
     if (terminalRef.current) {
-      // Only auto-scroll to bottom if history is being appended (not cleared)
-      // When history length is small (new command), scroll to top
       if (history.length <= 5) {
         terminalRef.current.scrollTo({
           top: 0,
           behavior: 'smooth'
         });
       } else {
-        // For longer history, scroll to bottom (normal typing behavior)
         terminalRef.current.scrollTo({
           top: terminalRef.current.scrollHeight,
           behavior: 'smooth'
@@ -191,15 +188,13 @@ const Terminal = () => {
           { type: 'output', content: 'Thanks for visiting! Refresh the page to restart.' }
         ];
 
-      // Fun messages for common Unix/Linux commands
       case 'ls':
       case 'dir':
         return [
           { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
-          { type: 'output', content: '│  😄 Lol, we don\'t do that here!                              │' },
+          { type: 'output', content: '│  😄 Lol, we don\'t do that here!                            │' },
           { type: 'output', content: '│                                                             │' },
-          { type: 'output', content: '│  I can\'t expose my file directory. This is a CV terminal,  │' },
-          { type: 'output', content: '│  not a real shell! Try "help" to see what you can do.      │' },
+          { type: 'output', content: '│  I can\'t expose my file directory.                         │' },
           { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
         ];
 
@@ -208,7 +203,7 @@ const Terminal = () => {
           { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
           { type: 'output', content: '│  🚫 Nice try! But there\'s nowhere to navigate to.          │' },
           { type: 'output', content: '│                                                             │' },
-          { type: 'output', content: '│  This terminal is locked to my CV. You\'re already in the   │' },
+          { type: 'output', content: '│  You\'re already in the                                     │' },
           { type: 'output', content: '│  best directory - exploring my professional journey! 🚀     │' },
           { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
         ];
@@ -218,9 +213,9 @@ const Terminal = () => {
       case 'delete':
         return [
           { type: 'output', content: '┌─────────────────────────────────────────────────────────────┐' },
-          { type: 'output', content: '│  ⚠️  Whoa there! No deleting allowed!                        │' },
+          { type: 'output', content: '│  ⚠️  Whoa there! No deleting allowed!                       │' },
           { type: 'output', content: '│                                                             │' },
-          { type: 'output', content: '│  This is a read-only CV terminal. You can\'t delete anything │' },
+          { type: 'output', content: '│  You can\'t delete anything │' },
           { type: 'output', content: '│  here. My data is safe! 🔒                                   │' },
           { type: 'output', content: '└─────────────────────────────────────────────────────────────┘' }
         ];
@@ -329,16 +324,13 @@ const Terminal = () => {
 
     const trimmedCmd = cmd.trim().toLowerCase();
     
-    // Handle clear command specially - immediately clear all history
     if (trimmedCmd === 'clear') {
       setHistory([]);
       return;
     }
 
-    // Clear terminal first, then show command and output
     setHistory([]);
     
-    // Use setTimeout to ensure smooth transition and proper scrolling
     setTimeout(() => {
       const commandOutput: CommandOutput = { type: 'command', content: cmd };
       const results = executeCommand(cmd);
@@ -353,7 +345,6 @@ const Terminal = () => {
 
     const trimmedInput = input.trim().toLowerCase();
     
-    // Handle clear command specially - immediately clear all history
     if (trimmedInput === 'clear') {
       setHistory([]);
       setInput('');
@@ -372,23 +363,18 @@ const Terminal = () => {
 
   return (
     <div className="h-screen w-screen bg-gradient-to-br from-gray-950 via-black to-gray-950 text-green-400 font-mono overflow-hidden flex flex-col relative">
-      {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-green-500/30 rounded-full animate-pulse" style={{ animationDelay: '0s', animationDuration: '3s' }}></div>
         <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-cyan-500/30 rounded-full animate-pulse" style={{ animationDelay: '1s', animationDuration: '4s' }}></div>
         <div className="absolute bottom-1/4 left-1/3 w-1 h-1 bg-green-400/20 rounded-full animate-pulse" style={{ animationDelay: '2s', animationDuration: '5s' }}></div>
       </div>
-      {/* Fixed Header */}
       <div className="border-b border-green-500/30 bg-gradient-to-b from-black/95 via-gray-900/60 to-black/95 backdrop-blur-xl p-4 shadow-2xl relative z-10">
         <div className="max-w-5xl mx-auto space-y-3">
-          {/* Profile Banner */}
           <div className="text-center">
             <div className="relative border-2 border-green-500/60 rounded-xl p-5 bg-gradient-to-br from-black/60 via-gray-900/30 to-black/60 backdrop-blur-md shadow-[0_0_25px_rgba(34,197,94,0.2)] hover:shadow-[0_0_35px_rgba(34,197,94,0.3)] hover:border-green-400/80 transition-all duration-300 group">
-              {/* Glow effect */}
               <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-500/0 via-green-500/4 to-green-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               
               <div className="relative z-10 flex items-center gap-5">
-                {/* Profile Picture */}
                 <div className="flex-shrink-0">
                   <img 
                     src="/images/profpic.png" 
@@ -406,7 +392,6 @@ const Terminal = () => {
                   </div>
                 </div>
                 
-                {/* Name and Title */}
                 <div className="flex-1 text-left">
                   <h1 className="text-3xl font-bold mb-1 font-mono tracking-tight">
                     <span className="bg-gradient-to-r from-green-400 via-cyan-300 to-green-400 bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(34,197,94,0.5)]">
@@ -421,7 +406,6 @@ const Terminal = () => {
                   </p>
                 </div>
                 
-                {/* Quick Info Icons */}
                 <div className="flex-shrink-0 flex items-center gap-4 text-sm text-green-300/95 font-mono">
                   <div className="flex items-center gap-2">
                     <FaGraduationCap className="text-green-400" />
@@ -437,7 +421,6 @@ const Terminal = () => {
                   </div>
                 </div>
                 
-                {/* Contact Links */}
                 <div className="flex-shrink-0 flex items-center gap-3">
                   <a href="mailto:tzvidzayi@hotmail.com" className="text-green-400 hover:text-green-300 transition-all duration-200 hover:shadow-[0_0_8px_rgba(34,197,94,0.3)] hover:scale-110" title="Email">
                     <FaEnvelope className="text-lg" />
@@ -453,7 +436,6 @@ const Terminal = () => {
             </div>
           </div>
 
-          {/* Command Reference Table */}
           <div className="relative border border-green-500/40 rounded-lg p-3 bg-gradient-to-br from-black/40 via-gray-900/20 to-black/40 backdrop-blur-sm shadow-[0_0_15px_rgba(34,197,94,0.1)]">
             <div className="text-xs text-green-400/80 mb-2 font-semibold tracking-wider uppercase text-center">Quick Commands</div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
@@ -488,7 +470,6 @@ const Terminal = () => {
         </div>
       </div>
       
-      {/* Terminal Area - Centered */}
       <div className="flex-1 overflow-y-auto terminal-scrollbar relative z-10" ref={terminalRef}>
         <div className="max-w-3xl mx-auto px-6 py-6">
           {history.map((item, idx) => (
@@ -520,7 +501,6 @@ const Terminal = () => {
         </div>
       </div>
       
-      {/* Input Area - Centered */}
       <div className="border-t border-green-500/30 bg-gradient-to-t from-black/90 via-gray-900/50 to-transparent backdrop-blur-sm relative z-10 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
         <form onSubmit={handleSubmit} className="max-w-3xl mx-auto px-6 py-4 flex items-center">
           <span className="text-blue-400 font-bold mr-2 animate-pulse-slow">{currentPath}</span>
@@ -539,52 +519,63 @@ const Terminal = () => {
         </form>
       </div>
 
-      {/* Footer */}
-      <footer className="border-t border-green-500/30 bg-gradient-to-b from-black/90 via-gray-900/50 to-black/95 backdrop-blur-sm relative z-10 py-3">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
-            <div className="flex items-center gap-4 text-green-400/70">
-              <span className="flex items-center gap-1.5">
-                <span className="text-green-500">©</span>
-                <span>{new Date().getFullYear()} Tich Zvidzayi</span>
-              </span>
-              <span className="hidden sm:inline text-green-500/50">|</span>
-              <span className="text-green-400/60">Built with React & TypeScript</span>
+      <footer className="relative z-10 mt-auto">
+        <div className="h-px bg-gradient-to-r from-transparent via-green-500/60 to-transparent shadow-[0_0_10px_rgba(34,197,94,0.3)]"></div>
+        
+        <div className="bg-gradient-to-b from-gray-950/95 via-black/98 to-black border-t-2 border-green-500/40 backdrop-blur-md shadow-[0_-5px_30px_rgba(0,0,0,0.8)]">
+          <div className="max-w-5xl mx-auto px-6 py-4">
+            <div className="mb-4 flex items-center justify-center">
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-green-500/30 to-green-500/30"></div>
+              <div className="px-3">
+                <span className="text-green-500/40 text-xs font-mono select-none">◆</span>
+              </div>
+              <div className="flex-1 h-px bg-gradient-to-r from-green-500/30 via-green-500/30 to-transparent"></div>
             </div>
             
-            <div className="flex items-center gap-4">
-              <a 
-                href="https://github.com/tichzvidzayi" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="text-green-400/70 hover:text-green-300 transition-all duration-200 hover:scale-110"
-                title="GitHub"
-              >
-                <FaGithub className="text-sm" />
-              </a>
-              <a 
-                href="https://linkedin.com/in/tichzvidzayi" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="text-green-400/70 hover:text-green-300 transition-all duration-200 hover:scale-110"
-                title="LinkedIn"
-              >
-                <FaLinkedin className="text-sm" />
-              </a>
-              <a 
-                href="mailto:tzvidzayi@hotmail.com" 
-                className="text-green-400/70 hover:text-green-300 transition-all duration-200 hover:scale-110"
-                title="Email"
-              >
-                <FaEnvelope className="text-sm" />
-              </a>
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
+              <div className="flex items-center gap-4 text-green-400/80">
+                <span className="flex items-center gap-1.5">
+                  <span className="text-green-500">©</span>
+                  <span>{new Date().getFullYear()} Tich Zvidzayi</span>
+                </span>
+                <span className="hidden sm:inline text-green-500/40">|</span>
+                <span className="text-green-400/70">Built with React & TypeScript</span>
+              </div>
+              
+              <div className="flex items-center gap-4">
+                <a 
+                  href="https://github.com/tichzvidzayi" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-green-400/80 hover:text-green-300 transition-all duration-200 hover:scale-110 hover:shadow-[0_0_8px_rgba(34,197,94,0.3)]"
+                  title="GitHub"
+                >
+                  <FaGithub className="text-base" />
+                </a>
+                <a 
+                  href="https://linkedin.com/in/tichzvidzayi" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-green-400/80 hover:text-green-300 transition-all duration-200 hover:scale-110 hover:shadow-[0_0_8px_rgba(34,197,94,0.3)]"
+                  title="LinkedIn"
+                >
+                  <FaLinkedin className="text-base" />
+                </a>
+                <a 
+                  href="mailto:tzvidzayi@hotmail.com" 
+                  className="text-green-400/80 hover:text-green-300 transition-all duration-200 hover:scale-110 hover:shadow-[0_0_8px_rgba(34,197,94,0.3)]"
+                  title="Email"
+                >
+                  <FaEnvelope className="text-base" />
+                </a>
+              </div>
             </div>
-          </div>
-          
-          <div className="mt-2 text-center">
-            <p className="text-green-400/50 text-[10px] font-mono">
-              Type <span className="text-green-400/80 font-semibold">help</span> to see available commands
-            </p>
+            
+            <div className="mt-3 text-center">
+              <p className="text-green-400/60 text-[10px] font-mono">
+                Type <span className="text-green-400/90 font-semibold">help</span> to see available commands
+              </p>
+            </div>
           </div>
         </div>
       </footer>
