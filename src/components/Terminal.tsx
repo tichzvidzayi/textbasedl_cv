@@ -88,6 +88,7 @@ const Terminal = () => {
   const [history, setHistory] = useState<CommandOutput[]>(() => getInitialHistory(getBoxWidth()));
   const [input, setInput] = useState('');
   const [currentPath] = useState('~');
+  const [activeCommand, setActiveCommand] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
@@ -381,9 +382,17 @@ const Terminal = () => {
     
     if (trimmedCmd === 'clear') {
       setHistory([]);
+      setActiveCommand(null);
       return;
     }
 
+    const validCommands = ['help', 'about', 'contact', 'experience', 'skills', 'education', 'projects', 'certifications', 'publications', 'softskills', 'interests'];
+    if (validCommands.includes(trimmedCmd)) {
+      setActiveCommand(trimmedCmd);
+    } else {
+      setActiveCommand(null);
+    }
+    
     setHistory([]);
     
     setTimeout(() => {
@@ -402,6 +411,7 @@ const Terminal = () => {
     
     if (trimmedInput === 'clear') {
       setHistory([]);
+      setActiveCommand(null);
       setInput('');
       return;
     }
@@ -507,19 +517,34 @@ const Terminal = () => {
                 { cmd: 'softskills', desc: 'Soft skills' },
                 { cmd: 'interests', desc: 'Interests' },
                 { cmd: 'clear', desc: 'Clear' }
-              ].map((item, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => {
-                    executeCommandDirectly(item.cmd);
-                  }}
-                  className="px-1.5 py-1 sm:px-2 sm:py-1.5 text-[9px] sm:text-[10px] md:text-xs font-mono text-green-300/90 bg-gradient-to-r from-green-500/10 to-cyan-500/5 rounded border border-green-500/30 hover:border-green-400/60 hover:bg-green-500/20 hover:text-green-200 transition-all duration-200 hover:scale-105 hover:shadow-[0_0_8px_rgba(34,197,94,0.2)] cursor-pointer group active:scale-95 break-words min-w-0 touch-manipulation"
-                  title={item.desc}
-                >
-                  <div className="font-semibold text-green-400 group-hover:text-green-300 transition-colors break-words leading-tight">{item.cmd}</div>
-                  <div className="text-[8px] sm:text-[9px] md:text-[10px] text-green-400/60 group-hover:text-green-400/80 mt-0.5 break-words leading-tight" style={{ wordBreak: 'break-word' }}>{item.desc}</div>
-                </button>
-              ))}
+              ].map((item, idx) => {
+                const isActive = activeCommand === item.cmd.toLowerCase();
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      executeCommandDirectly(item.cmd);
+                    }}
+                    className={`px-1.5 py-1 sm:px-2 sm:py-1.5 text-[9px] sm:text-[10px] md:text-xs font-mono rounded border transition-all duration-200 cursor-pointer group active:scale-95 break-words min-w-0 touch-manipulation ${
+                      isActive
+                        ? 'text-green-200 bg-gradient-to-r from-green-500/30 to-cyan-500/20 border-green-400/80 shadow-[0_0_12px_rgba(34,197,94,0.4)] scale-105'
+                        : 'text-green-300/90 bg-gradient-to-r from-green-500/10 to-cyan-500/5 border-green-500/30 hover:border-green-400/60 hover:bg-green-500/20 hover:text-green-200 hover:scale-105 hover:shadow-[0_0_8px_rgba(34,197,94,0.2)]'
+                    }`}
+                    title={item.desc}
+                  >
+                    <div className={`font-semibold transition-colors break-words leading-tight ${
+                      isActive
+                        ? 'text-green-200'
+                        : 'text-green-400 group-hover:text-green-300'
+                    }`}>{item.cmd}</div>
+                    <div className={`mt-0.5 break-words leading-tight transition-colors ${
+                      isActive
+                        ? 'text-green-300/90'
+                        : 'text-green-400/60 group-hover:text-green-400/80'
+                    } text-[8px] sm:text-[9px] md:text-[10px]`} style={{ wordBreak: 'break-word' }}>{item.desc}</div>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -540,11 +565,20 @@ const Terminal = () => {
                   <span className="text-cyan-300">{item.content}</span>
                 </div>
               )}
-              {item.type === 'output' && (
-                <div className={`${item.content.includes('┌') || item.content.includes('│') || item.content.includes('└') ? 'whitespace-pre overflow-x-auto' : 'whitespace-pre-wrap break-words'} text-green-300/90 leading-relaxed font-mono text-xs sm:text-sm tracking-normal animate-fade-in-smooth drop-shadow-[0_0_2px_rgba(34,197,94,0.3)] ${item.className || ''}`} style={item.content.includes('┌') || item.content.includes('│') || item.content.includes('└') ? {} : { wordBreak: 'break-word', overflowWrap: 'break-word' }}>
-                  {item.content}
-                </div>
-              )}
+              {item.type === 'output' && (() => {
+                const content = item.content.trim();
+                const isSeparator = content && content.length > 0 && content.split('').every(char => char === '─');
+                const isBoxDrawing = item.content.includes('┌') || item.content.includes('│') || item.content.includes('└');
+                const shouldNotWrap = isSeparator || isBoxDrawing;
+                
+                return (
+                  <div className={shouldNotWrap ? 'overflow-x-auto -mx-3 sm:-mx-4 md:-mx-6 px-3 sm:px-4 md:px-6' : ''}>
+                    <div className={`${shouldNotWrap ? 'whitespace-pre nowrap' : 'whitespace-pre-wrap break-words'} text-green-300/90 leading-relaxed font-mono text-xs sm:text-sm tracking-normal animate-fade-in-smooth drop-shadow-[0_0_2px_rgba(34,197,94,0.3)] ${item.className || ''}`} style={shouldNotWrap ? {} : { wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                      {item.content}
+                    </div>
+                  </div>
+                );
+              })()}
               {item.type === 'error' && (
                 <div className="text-red-400 bg-red-900/20 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg border border-red-500/30 animate-shake flex items-center gap-2 break-words text-xs sm:text-sm" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
                   <FaExclamationTriangle className="text-red-500 flex-shrink-0 text-sm sm:text-base" />
