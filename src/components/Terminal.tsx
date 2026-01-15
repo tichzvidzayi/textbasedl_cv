@@ -35,7 +35,23 @@ const Terminal = () => {
   
   useEffect(() => {
     const updateBoxWidth = () => {
-      setBoxWidth(getBoxWidth());
+      const newWidth = getBoxWidth();
+      setBoxWidth(newWidth);
+      
+      setHistory(prev => {
+        if (prev.length <= 5 && prev.some(item => item.content.includes('QUICK INFO'))) {
+          return getInitialHistory(newWidth);
+        }
+        return prev.map(item => {
+          if (item.type === 'output' && item.content && typeof item.content === 'string') {
+            const content = item.content.trim();
+            if (content && content.length > 0 && content.split('').every(char => char === '─')) {
+              return { ...item, content: '─'.repeat(newWidth) };
+            }
+          }
+          return item;
+        });
+      });
     };
     
     updateBoxWidth();
