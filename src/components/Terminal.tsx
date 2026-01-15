@@ -369,8 +369,20 @@ const Terminal = () => {
         return [];
 
       default:
+        const funnyMessages = [
+          `🤔 Hmm, "${command}"? That's not in my vocabulary!\n\nI'm a CV terminal, not a magic 8-ball! 🎱\nTry "help" to see what I actually know.`,
+          `🚫 Nope! "${command}" isn't a thing here.\n\nI'm like a picky eater - I only accept specific commands! 😄\nType "help" to see my menu.`,
+          `💭 "${command}"? Never heard of it!\n\nI'm a CV terminal, not Google! 😂\nUse "help" to see what commands I understand.`,
+          `🎭 "${command}"? That's not in my script!\n\nI'm an actor who only knows certain lines! 🎬\nCheck "help" for my lines.`,
+          `🤷 "${command}"? I don't speak that language!\n\nI only understand CV-related commands! 📝\nType "help" to learn my language.`,
+          `😅 "${command}"? That's a hard pass from me!\n\nI'm a professional CV terminal, not a command buffet! 🍽️\nTry "help" to see what's on the menu.`
+        ];
+        const randomMessage = funnyMessages[Math.floor(Math.random() * funnyMessages.length)];
         return [
-          { type: 'error', content: `Command not found: ${command}. Type "help" for available commands.` }
+          { 
+            type: 'error', 
+            content: randomMessage
+          }
         ];
     }
   };
@@ -586,9 +598,11 @@ const Terminal = () => {
                 );
               })()}
               {item.type === 'error' && (
-                <div className="text-red-400 bg-red-900/20 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg border border-red-500/30 animate-shake flex items-center gap-2 break-words text-xs sm:text-sm" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
-                  <FaExclamationTriangle className="text-red-500 flex-shrink-0 text-sm sm:text-base" />
-                  <span className="break-words">{item.content}</span>
+                <div className="text-orange-300 bg-orange-900/20 px-2 sm:px-3 py-2 sm:py-2.5 rounded-lg border border-orange-500/40 animate-shake break-words text-xs sm:text-sm" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                  <div className="flex items-start gap-2">
+                    <FaExclamationTriangle className="text-orange-400 flex-shrink-0 text-sm sm:text-base mt-0.5" />
+                    <div className="flex-1 whitespace-pre-wrap break-words leading-relaxed">{item.content}</div>
+                  </div>
                 </div>
               )}
             </div>
