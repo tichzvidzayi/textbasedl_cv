@@ -41,6 +41,11 @@
   .terminal-scrollbar {
     scroll-behavior: smooth;
   }
+  
+  /* Better touch interactions on mobile */
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
 }
 
 /* Cursor blink animation */
