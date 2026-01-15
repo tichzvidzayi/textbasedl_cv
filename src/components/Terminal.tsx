@@ -369,21 +369,74 @@ const Terminal = () => {
         return [];
 
       default:
-        const funnyMessages = [
-          `🤔 Hmm, "${command}"? That's not in my vocabulary!\n\nI'm a CV terminal, not a magic 8-ball! 🎱\nTry "help" to see what I actually know.`,
-          `🚫 Nope! "${command}" isn't a thing here.\n\nI'm like a picky eater - I only accept specific commands! 😄\nType "help" to see my menu.`,
-          `💭 "${command}"? Never heard of it!\n\nI'm a CV terminal, not Google! 😂\nUse "help" to see what commands I understand.`,
-          `🎭 "${command}"? That's not in my script!\n\nI'm an actor who only knows certain lines! 🎬\nCheck "help" for my lines.`,
-          `🤷 "${command}"? I don't speak that language!\n\nI only understand CV-related commands! 📝\nType "help" to learn my language.`,
-          `😅 "${command}"? That's a hard pass from me!\n\nI'm a professional CV terminal, not a command buffet! 🍽️\nTry "help" to see what's on the menu.`
+        const funnyMessages: CommandOutput[][] = [
+          [
+            { type: 'output' as const, content: '┌─────────────────────────────────────────────────────────────┐' },
+            { type: 'output' as const, content: `│  🤔 Hmm, "${command}"? That's not in my vocabulary!            │` },
+            { type: 'output' as const, content: '│                                                             │' },
+            { type: 'output' as const, content: '│  I\'m a CV terminal, not a magic 8-ball! 🎱                  │' },
+            { type: 'output' as const, content: '│  Try "help" to see what I actually know.                     │' },
+            { type: 'output' as const, content: '└─────────────────────────────────────────────────────────────┘' }
+          ],
+          [
+            { type: 'output' as const, content: '┌─────────────────────────────────────────────────────────────┐' },
+            { type: 'output' as const, content: `│  🚫 Nope! "${command}" isn't a thing here.                    │` },
+            { type: 'output' as const, content: '│                                                             │' },
+            { type: 'output' as const, content: '│  I\'m like a picky eater - I only accept specific commands! │' },
+            { type: 'output' as const, content: '│  Type "help" to see my menu. 😄                              │' },
+            { type: 'output' as const, content: '└─────────────────────────────────────────────────────────────┘' }
+          ],
+          [
+            { type: 'output' as const, content: '┌─────────────────────────────────────────────────────────────┐' },
+            { type: 'output' as const, content: `│  💭 "${command}"? Never heard of it!                          │` },
+            { type: 'output' as const, content: '│                                                             │' },
+            { type: 'output' as const, content: '│  I\'m a CV terminal, not Google! 😂                           │' },
+            { type: 'output' as const, content: '│  Use "help" to see what commands I understand.               │' },
+            { type: 'output' as const, content: '└─────────────────────────────────────────────────────────────┘' }
+          ],
+          [
+            { type: 'output' as const, content: '┌─────────────────────────────────────────────────────────────┐' },
+            { type: 'output' as const, content: `│  🎭 "${command}"? That's not in my script!                   │` },
+            { type: 'output' as const, content: '│                                                             │' },
+            { type: 'output' as const, content: '│  I\'m an actor who only knows certain lines! 🎬               │' },
+            { type: 'output' as const, content: '│  Check "help" for my lines.                                   │' },
+            { type: 'output' as const, content: '└─────────────────────────────────────────────────────────────┘' }
+          ],
+          [
+            { type: 'output' as const, content: '┌─────────────────────────────────────────────────────────────┐' },
+            { type: 'output' as const, content: `│  🤷 "${command}"? I don't speak that language!               │` },
+            { type: 'output' as const, content: '│                                                             │' },
+            { type: 'output' as const, content: '│  I only understand CV-related commands! 📝                   │' },
+            { type: 'output' as const, content: '│  Type "help" to learn my language.                           │' },
+            { type: 'output' as const, content: '└─────────────────────────────────────────────────────────────┘' }
+          ],
+          [
+            { type: 'output' as const, content: '┌─────────────────────────────────────────────────────────────┐' },
+            { type: 'output' as const, content: `│  😅 "${command}"? That's a hard pass from me!                │` },
+            { type: 'output' as const, content: '│                                                             │' },
+            { type: 'output' as const, content: '│  I\'m a professional CV terminal, not a command buffet! 🍽️  │' },
+            { type: 'output' as const, content: '│  Try "help" to see what\'s on the menu.                        │' },
+            { type: 'output' as const, content: '└─────────────────────────────────────────────────────────────┘' }
+          ],
+          [
+            { type: 'output' as const, content: '┌─────────────────────────────────────────────────────────────┐' },
+            { type: 'output' as const, content: `│  🎪 "${command}"? That command doesn't exist in this circus!  │` },
+            { type: 'output' as const, content: '│                                                             │' },
+            { type: 'output' as const, content: '│  I\'m a CV terminal, not a command magician! 🎩                │' },
+            { type: 'output' as const, content: '│  Type "help" to see my tricks!                               │' },
+            { type: 'output' as const, content: '└─────────────────────────────────────────────────────────────┘' }
+          ],
+          [
+            { type: 'output' as const, content: '┌─────────────────────────────────────────────────────────────┐' },
+            { type: 'output' as const, content: `│  🚀 "${command}"? That's not how I roll!                      │` },
+            { type: 'output' as const, content: '│                                                             │' },
+            { type: 'output' as const, content: '│  I\'m a CV terminal on a mission! 🎯                         │' },
+            { type: 'output' as const, content: '│  Use "help" to see my mission commands.                      │' },
+            { type: 'output' as const, content: '└─────────────────────────────────────────────────────────────┘' }
+          ]
         ];
         const randomMessage = funnyMessages[Math.floor(Math.random() * funnyMessages.length)];
-        return [
-          { 
-            type: 'error', 
-            content: randomMessage
-          }
-        ];
+        return randomMessage;
     }
   };
 
