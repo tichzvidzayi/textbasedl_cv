@@ -587,7 +587,7 @@ const Terminal = () => {
                   </div>
                   <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2">
                     <FaBriefcase className="text-green-400 text-xs sm:text-sm md:text-base" />
-                    <span className="hidden sm:inline">6+ yrs</span>
+                    <span className="hidden sm:inline">6+ years</span>
                   </div>
                   <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2">
                     <FaMapMarkerAlt className="text-green-400 text-xs sm:text-sm md:text-base" />
